@@ -21,7 +21,6 @@ namespace type
     //A helper namespace to help reduce typing
     using ul_ul     = std::pair<unsigned long, unsigned long>;
     using vstrings  = std::vector<std::string>;
-    using SPJob     = std::shared_ptr<Job>;
     using uid_jobs  = std::map<unsigned long long, Job>;
 }
 
