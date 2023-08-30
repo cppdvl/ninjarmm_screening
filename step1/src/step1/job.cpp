@@ -43,9 +43,14 @@ std::string Job::getHeaderString() const
     return ss.str();
 }
 
+void Job::displayJob() const
+{
+    std::cout << getHeaderString();
+}
+
 void Job::displayAllJobs()
 {
-    for (const auto& job : mJobs) job.second->displayJob();
+    for (const auto& id_job : mJobs) id_job.second.displayJob();
 }
 
 void Job::deleteJob(unsigned long long jobId)
@@ -59,12 +64,12 @@ auto Job::getJobById(unsigned long long jobId)
     return mJobs.find(jobId);
 }
 
-unsigned long long Job::addJob(Job* job)
+unsigned long long Job::addJob(Job& job)
 {
-    auto id = job->mID;
-    if (mJobs.find(job->mID) == mJobs.end())
-        mJobs.insert(std::make_pair(id, job));
-    return job->mID;
+    auto id = job.mID;
+    if (mJobs.find(job.mID) == mJobs.end())
+        mJobs.insert(std::make_pair(id, std::move(job)));
+    return job.mID;
 }
 
 
