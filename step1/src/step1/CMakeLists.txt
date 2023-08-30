@@ -4,4 +4,4 @@ set(EMPLOYEE_SOURCES preddicators_main.cpp predicators.cpp)
 
 # Generate the main executable
 add_executable(jobs ${JOB_SOURCES})
-add_executable(employee ${EMPLOYEE_SOURCES})
+add_executable(predicators ${EMPLOYEE_SOURCES})

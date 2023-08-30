@@ -21,12 +21,12 @@ auto ContainsTheString(std::vector<std::string> strings, std::function<bool(cons
 }
 
 
-/*std::ostream  &operator<<(std::ostream &os, const std::vector<std::string> &strings)
+std::ostream &operator<<(std::ostream &os, const std::vector<std::string> &strings)
 {
     os << "\""; for (const auto &string : strings) os << string << ", ";
     os << (char) 0x8 << (char) 0x8 << "\"";
     return os;
-}*/
+}
 
 int main ()
 {
@@ -45,14 +45,14 @@ int main ()
     auto thinkIllStayAroundAroundAround = std::vector<std::string> {"think", "Ill", "stay", "around", "around", "around"};
 
     auto hits = ContainsTheString(onetesthere);
-    //std::cout << onetesthere << " hits test " << hits << " time" << (hits==1 ? "":"s") << std::endl;
+    std::cout << onetesthere << " hits test " << hits << " time" << (hits==1 ? "":"s") << std::endl;
 
     auto anotherPredicate = [](const auto& tested){ return tested == "around"; };
     hits = ContainsTheString(nowimhere, anotherPredicate);
-    //std::cout << nowimhere << " hits around " << hits << " time" << (hits==1 ? "":"s") << std::endl;
+    std::cout << nowimhere << " hits around " << hits << " time" << (hits==1 ? "":"s") << std::endl;
 
     hits = ContainsTheString(thinkIllStayAroundAroundAround, anotherPredicate);
-    //std::cout << thinkIllStayAroundAroundAround << " hits around " << hits << " time" << (hits==1 ? "":"s") << std::endl;
+    std::cout << thinkIllStayAroundAroundAround << " hits around " << hits << " time" << (hits==1 ? "":"s") << std::endl;
 
     return 0;
 }

@@ -6,7 +6,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 set(CMAKE_CXX_FLAGS -Wfatal-errors)
 
-#[[include(FetchContent)
+include(FetchContent)
 FetchContent_Declare(
         googletest
         GIT_REPOSITORY https://github.com/google/googletest.git
@@ -15,5 +15,5 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
-]]
+
 add_subdirectory(src/step1)
