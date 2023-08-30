@@ -1,5 +1,5 @@
 #any build folder
-*build/
+*build*/
 
 # Prerequisites
 *.d
@@ -36,5 +36,6 @@
 step2/~$quirements.docx
 
 
-.idea
-
+# Jetbrains and neovim
+.idea 
+.ccls*
