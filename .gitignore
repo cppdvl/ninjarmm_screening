@@ -1,3 +1,6 @@
+#any build folder
+*build/
+
 # Prerequisites
 *.d
 
@@ -31,3 +34,7 @@
 *.out
 *.app
 step2/~$quirements.docx
+
+
+.idea
+
