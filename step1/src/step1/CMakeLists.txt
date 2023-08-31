@@ -1,7 +1,7 @@
 
 
 # Specify the sources to compile
-set(JOB_SOURCES job_main.cpp job.cpp tests.cpp)
+set(JOB_SOURCES job_main.cpp job.cpp)
 set(EMPLOYEE_SOURCES preddicators_main.cpp predicators.cpp)
 set(JOBMOCKING_SOURCES tests.cpp job.cpp)
 # Generate the main executable
