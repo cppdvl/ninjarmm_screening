@@ -1,6 +1,7 @@
 # JULIAN GUARIN ANSWERS
 
 The tree looks like this from the root folder:
+```
 step1
 ├── CMakeLists.txt
 ├── Requirements.txt
@@ -11,7 +12,7 @@ step3
 ├── CMakeLists.txt
 ├── CodeChallenge.cpp
 └── cmake-build-debug
-
+```
 PLEASE NOTE IS MANDATORY to EXECUTE THE BUILD SCRIPTS WITH NINJA INSTALLED, This way is mandatory to fetch googletest with no need to have it previously installed.
 THIS BUILD SCRIPT WAS TESTED IN LINUX AND MAC.
 
