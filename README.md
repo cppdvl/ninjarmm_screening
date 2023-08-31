@@ -1,3 +1,68 @@
+# JULIAN GUARIN ANSWERS
+
+The tree looks like this from the root folder:
+step1
+├── CMakeLists.txt
+├── Requirements.txt
+└── src
+step2
+└── CodeReview.cpp
+step3
+├── CMakeLists.txt
+├── CodeChallenge.cpp
+└── cmake-build-debug
+
+PLEASE NOTE IS MANDATORY to EXECUTE THE BUILD SCRIPTS WITH NINJA INSTALLED, This way is mandatory to fetch googletest with no need to have it previously installed.
+THIS BUILD SCRIPT WAS TESTED IN LINUX AND MAC.
+
+
+
+To compile Step 1 tests do:
+
+```
+cd src/step1
+mkdir build
+cd build 
+cmake -G Ninja -S .. -B .
+cmake --build . --target jobmockers 
+cmake --build . --target jobs
+cmake --build . --target predicators
+
+src/step1/jobmockers
+src/step1/jobs
+src/step1/predicators
+
+```
+
+To compile Step 3 tests do:
+
+```
+cd step3
+mkdir build
+cd build
+
+cmake -G Ninja -S .. -B .
+cmake --build .
+./CodeChallenge
+```
+
+To Review the recommendations of the codereview in step2:
+
+```
+git show -n 1 f070221
+```
+
+Alternatively you can see the file with comments for the review:
+```
+git reset --hard f070221
+nvim step2/CodeReview.cpp
+```
+
+
+
+
+
+
 # Welcome!
 Thank you for considering NinjaRMM as your future home. In this repository you'll find some of our screening materials that we expect you to complete. The folder structure is explained below. 
 
