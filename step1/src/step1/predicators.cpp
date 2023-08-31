@@ -28,6 +28,19 @@ std::ostream &operator<<(std::ostream &os, const std::vector<std::string> &strin
     return os;
 }
 
+
+//Recursive Acumulator
+template <typename T>
+T Sum(T value)
+{
+    return value;
+}
+template <typename T, typename... Args>
+T Sum(T value, Args... args)
+{
+    return value + Sum(args...);
+}
+
 int main ()
 {
     std::cout << IsInBounds<int>(0, 1, 10) << std::endl;
@@ -53,6 +66,9 @@ int main ()
 
     hits = ContainsTheString(thinkIllStayAroundAroundAround, anotherPredicate);
     std::cout << thinkIllStayAroundAroundAround << " hits around " << hits << " time" << (hits==1 ? "":"s") << std::endl;
+
+
+    std::cout << "How about this Sumatory (1,2,3,4,5,6) = 21, Sum(1,2,3,4,5,6) = "  << Sum(1,2,3,4,5,6) <<  std::endl;
 
     return 0;
 }
