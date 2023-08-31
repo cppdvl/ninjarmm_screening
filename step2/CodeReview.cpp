@@ -13,6 +13,9 @@ Comments are encouraged.
 
 struct ThirdPartyAVSoftware
 {
+    /// Two recomendations:
+    /// 1. Define default names to initialize the elements of the struct.
+    /// 2. Why Definition status is string opposed to wstring as the rest? Can you please add comments for clarifications
     std::wstring Name;
     std::wstring Description;
     std::wstring DefinitionUpdateTime;
@@ -23,6 +26,10 @@ struct ThirdPartyAVSoftware
 
 bool queryWindowsForAVSoftwareDataWSC(std::map<std::wstring, ThirdPartyAVSoftware>& thirdPartyAVSoftwareMap)
 {
+    //thirsPartyAVSoftwareMap is a reference, so, do we have a mutex lock to sync and avoid race conditions? 
+    //Is this single threaded? Do we have a Global Mutex Lock?
+    
+    
     HRESULT hr = S_OK;
     IWscProduct* PtrProduct = nullptr;
     IWSCProductList* PtrProductList = nullptr;
@@ -40,7 +47,10 @@ bool queryWindowsForAVSoftwareDataWSC(std::map<std::wstring, ThirdPartyAVSoftwar
         std::cout << "Failed to create WSCProductList object. ";
         return false;
     }
-
+    
+    //Maybe cocreate instance provides a check for PtrProductList, but I suggest a guard to test PtrProducList is valid.
+    //Are we sure this scope is the owner of PtrProductList? What if other thread releases it?
+    
     hr = PtrProductList->Initialize(WSC_SECURITY_PROVIDER_ANTIVIRUS);
     if (FAILED(hr))
     {
@@ -63,7 +73,7 @@ bool queryWindowsForAVSoftwareDataWSC(std::map<std::wstring, ThirdPartyAVSoftwar
             std::cout << "Failed to query AV product.";
             continue;
         }
-
+        //Sanity check for PtrProduct. hr failing it's just a convention (a valid one perhaps, but yet a convention).
         hr = PtrProduct->get_ProductName(&PtrVal);
         if (FAILED(hr))
         {
@@ -73,6 +83,7 @@ bool queryWindowsForAVSoftwareDataWSC(std::map<std::wstring, ThirdPartyAVSoftwar
         }
 
         displayName = std::wstring(PtrVal, SysStringLen(PtrVal));
+        //How about releasing PtrVal here? 
 
         hr = PtrProduct->get_ProductState(&ProductState);
         if (FAILED(hr))
@@ -111,15 +122,21 @@ bool queryWindowsForAVSoftwareDataWSC(std::map<std::wstring, ThirdPartyAVSoftwar
         }
         timestamp = std::wstring(PtrVal, SysStringLen(PtrVal));
         SysFreeString(PtrVal);
-
+        
+        //What about version? It is not initialized, and never written.
+        //Is it description correctly assigned? state doesn't feel like the adequate to assign/.
         ThirdPartyAVSoftware thirdPartyAVSoftware;
         thirdPartyAVSoftware.Name = displayName;
         thirdPartyAVSoftware.DefinitionStatus = definitionState;
         thirdPartyAVSoftware.DefinitionUpdateTime = timestamp;
         thirdPartyAVSoftware.Description = state;
         thirdPartyAVSoftware.ProductState = state;
+        
+        //What if the display name is it already assigned in this map? 
+        //Can you use a multimap instead? Or should you handle the collision? How would you handle if you must?
         thirdPartyAVSoftwareMap[thirdPartyAVSoftware.Name] = thirdPartyAVSoftware;
-
+        
+        
         PtrProduct->Release();
     }
 
